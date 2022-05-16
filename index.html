@@ -1,15 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="simple-grid.css">
     <title>Document</title>
 </head>
+
 <body>
-    <div class="container">
+    <div class="container" x-data="container">
         <h5>The Taxi App</h5>
+        <div class="row">
+            <div class="col-12">
+
+                <table class="table  table-striped table-hover">
+
+                    <tr>
+                        <th>From</th>
+                        <th>Destination</th>
+                        <th>Que</th>
+                        <th>Action</th>
+                        <th>Trip</th>
+                        <th>Avail. Taxis</th>
+                        <!-- <th>Price</th>
+                        <th>Total Amount</th> -->
+                    </tr>
+                    <template x-for="queue in queues">
+                        <tr>
+                            <td>Cape Town </td>
+                            <td>
+                                <span x-text="queue.rankName"></span>
+                            </td>
+                            <td><span x-text="queue.passengerCount">0</span></td>
+                            <td> <button id="plus" @click="queue.que()">+</button>
+                                <button x-bind:disabled="queue.passengerCount <= 0" id="minus"
+                                    @click="queue.lessQue()">-</button>
+                            </td>
+
+                            <td> <button id="leave" x-bind:disabled="queue.passengerCount < 3"
+                                    x-bind:hidden="queue.availTaxi <= 0" x-show="queue.message()"
+                                    @click="queue.leave()">Depart</button>
+                                <span x-text="queue.left">0</span>
+                            </td>
+
+                            <td><span x-text="queue.trip()">0</span></td>
+
+                        </tr>
+                    </template>
+               
+
+
+                </table>
+            </div>
+
+
+        </div>
     </div>
+
+    <script src="classes.js"></script>
+    <script src="index.js"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
 </body>
+
+
 </html>
