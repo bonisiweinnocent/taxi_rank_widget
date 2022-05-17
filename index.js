@@ -12,7 +12,7 @@ document.addEventListener('alpine:init', () => {
                
             },
             open: false,
-            ranks: ['Langa', 'Somora', 'Nyanga', 'Belhar'],
+            ranks: ['Langa', 'Samora', 'Nyanga', 'Belhar'],
             queues: []
 
 
