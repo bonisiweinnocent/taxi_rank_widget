@@ -17,73 +17,96 @@
         <h5>The Taxi App</h5>
         <div class="row">
             <div class="col-12">
-                
-              
-                    <table class="table  table-striped table-hover">
-
-                        <tr>
-                            <th>From</th>
-                            <th>Destination</th>
-                            <th>Que</th>
-                            <th>Action</th>
-                            <th>Trip</th>
-                            <th>Avail. Taxis</th>
-                            <th>Price</th>
-                            <th>Total Amount</th>
-                        </tr>
-
-
-                        <template x-for="queue in queues">
-                            <tr>
-                                <td>Cape Town </td>
-                                <td>
-                                    <span x-text="queue.rankName"></span>
-
-
-                                </td>
-                                <td><span x-text="queue.passengerCount">0</span></td>
-                                <td> <button id="plus" @click="queue.que()">+</button>
-                                    <button x-bind:disabled="queue.passengerCount <= 0" id="minus"
-                                        @click="queue.lessQue()">-</button>
-                                </td>
-
-                                <td> <button id="leave" x-bind:disabled="queue.passengerCount < 8"
-                                        x-bind:hidden="queue.availTaxi <= 0" @click="queue.leave()">Depart</button>
-                                    <span x-text="queue.left">0</span>
-                                </td>
-
-                                <td><span x-text="queue.trip()">0</span></td>
-                                <td>
-                                <template x-if="queue.rankName== 'Langa'">
-                                  <p x-text="'R' + queue.langaFare()"></p>
-                                </template>
-                           
-
-                           
-                                <template x-if="queue.rankName== 'Samora'">
-                                  <p x-text="'R' + queue.samoraFare()"></p>
-                                </template>
-
-                                <template x-if="queue.rankName== 'Nyanga'">
-                                    <p x-text="'R' + queue.nyangaFare()"></p>
-                                  </template>
-
-                                  <template x-if="queue.rankName== 'Belhar'">
-                                    <p x-text="'R' + queue.belharFare()"></p>
-                                  </template>
-                            </td>
-                                <td x-text="queue.total()"></td>
-                               
-                            </tr>
-                        </template>
-
-
-
-                    </table>
-                
-
+                <h6 class="total">Daily Total Income</h6>
+                <div class="total">
+                   
+                    <p x-text="'R'+overallTotal()"></p>
+                </div>
             </div>
+
         </div>
+        <div class="row">
+            <div class="col-12">
+
+
+                <table class="table  table-striped table-hover">
+
+                    <tr>
+                        <th>From</th>
+                        <th>Destination</th>
+                        <th>Que</th>
+                        <th>Action</th>
+                        <th>Trip</th>
+                        <th>Avail. Taxis</th>
+                        <th>Price</th>
+                        <th>Total Amount</th>
+                    </tr>
+
+
+                    <template x-for="route in routes">
+                        <tr>
+                            <td>Cape Town </td>
+                            <td>
+                                <span x-text="route.rankName"></span>
+
+
+                            </td>
+                            <td><span x-text="route.passengerCount">0</span></td>
+                            <td> <button id="plus" @click="route.que()">+</button>
+                                <button x-bind:disabled="route.passengerCount <= 0" id="minus"
+                                    @click="route.lessQue()">-</button>
+                            </td>
+
+                            <td> <button id="leave" x-bind:disabled="route.passengerCount < 8"
+                                    x-bind:hidden="route.availTaxi <= 0"
+                                    @click="route.leave(); route.total()">Depart</button>
+                                <span x-text="route.left">0</span>
+                            </td>
+
+                            <td><span x-text="route.trip()">0</span></td>
+                            <td x-text="route.price">
+                            </td>
+                            <td x-text="route.totalIncome()"></td>
+
+                        </tr>
+                    </template>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- <div class="row">
+
+            <div class="col-12">
+
+              
+
+                    <div class="field">
+                        <label for="">Destination</label>
+                        <input type="text" name="destination" class="description">
+                    </div>
+                    <div class="field">
+                        <label for="">Avail. Taxis</label>
+                        <input type="text" name="available" class="available">
+                    </div>
+                    <div class="field">
+                        <label for="">Price</label>
+                        <input type="text" name="" class="price">
+                    </div>
+
+                    <div class="mt1">
+                        <button class="addRouteBtn" @click="addDestination()">Add</button>
+                        <button type="button">Hide</button>
+
+                    </div>
+
+                </div>
+            </div> -->
+
+
+
+        </div>
+
     </div>
 
     <script src="classes.js"></script>

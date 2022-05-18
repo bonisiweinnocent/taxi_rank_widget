@@ -1,25 +1,28 @@
 
 
 class Rank {
-    belharPrice = 25.00
-    nyangaPrice = 22.00
-    samoraPrice = 21.00
-    langaPrice = 14.00
+  
     availTaxi = 3;
     passengerCount = 0;
     left = 0;
-    constructor(rankName) {
+    income = 0
+    constructor(rankName, price) {
         this.rankName = rankName
+        this.price = price
     }
 
     que() {
-        // alert("hi")
+
         return this.passengerCount++
 
     }
     lessQue() {
-        // this.passengerCount--;
+
         return this.passengerCount--
+    }
+
+    addDestination(area) {
+        return this.ranks.push(area)
     }
 
     trip() {
@@ -32,27 +35,19 @@ class Rank {
     leave() {
         this.passengerCount = this.passengerCount - 8
         this.availTaxi = this.availTaxi - 1
+        this.income += this.price * 8
         return this.left++
 
     }
-    langaFare() {
-        return this.langaPrice
+
+    // totalAmount(){
+    //     return this.income
+    // }
+
+     totalIncome() {
+        return this.income
     }
-    samoraFare() {
-        return this.samoraPrice
-    }
-    nyangaFare() {
-        return this.nyangaPrice
-    }
-    belharFare() {
-        return this.belharPrice
-    }
-    total(langaPrice, samoraPrice, nyangaPrice, belhar) {
-        if (langaPrice) {
-            langaPrice * 8
-        }
-    }
-    //decrease the number of taxis available
+    
     decreasePassengers() {
         this.leave()
         return this.passengerCount - 3

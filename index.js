@@ -3,20 +3,24 @@ document.addEventListener('alpine:init', () => {
         return {
             init() {
                 console.log("Hello World");
-                
-
-                this.queues = this.ranks.map(rank => {
-                    return new Rank(rank)
+                this.routes = this.routesData.map(route => {
+                    return new Rank(route.name, route.price)
                 })
-                
-               
+
             },
             open: false,
-            ranks: ['Langa', 'Samora', 'Nyanga', 'Belhar'],
-            queues: []
+            routesData: [{ name: 'Langa', "price": 14.00 }, { name: 'Samora', "price": 21.00 }, { name: 'Belhar', "price": 25.00 }, { name: 'Nyanga', "price": 22.00 }],
+            queues: [],
 
-
+            overallTotal(){
+                let total = 0
+                this.routes.forEach(route => {
+                    total += route.totalIncome()
+                    
+                });
+                return total
+            }
         }
-        
+
     })
 })
